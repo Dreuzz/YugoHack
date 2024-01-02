@@ -1,0 +1,34 @@
+package net.dreuzzz.yugohack.event;
+
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import org.lwjgl.glfw.GLFW;
+
+public class KeyInput {
+    public static final String KEY_CATEGORY_YUGOHACK = "key.yugohack.category";
+    public static final String KEY_OPENGUI = "key.yugohack.opengui";
+
+    public static KeyBinding ClickGuiKey;
+
+    public static void RegisterKeyInput() {
+        ClientTickEvents.START_CLIENT_TICK.register(client -> {
+            if(ClickGuiKey.wasPressed()) {
+                client.player.sendCommand("time add 300");
+            }
+        });
+    }
+
+    public static void register() {
+        ClickGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                KEY_OPENGUI,
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_RIGHT_SHIFT,
+                KEY_CATEGORY_YUGOHACK
+        ));
+
+        RegisterKeyInput();
+    }
+
+}
