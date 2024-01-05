@@ -1,5 +1,6 @@
 package net.dreuzzz.yugohack.event;
 
+import net.dreuzzz.yugohack.GUI.ClickGUI;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -14,8 +15,8 @@ public class KeyInput {
 
     public static void RegisterKeyInput() {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            if(ClickGuiKey.wasPressed()) {
-                client.player.sendCommand("time add 300");
+            if(ClickGuiKey.isPressed()) {
+
             }
         });
     }
